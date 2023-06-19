@@ -27,7 +27,6 @@ describe('Users', () => {
         .post('/api/auth/signup')
         .send(user)
         .end((err, res) => {
-          console.log('res: ', res._body);
           res.should.have.status(200);
           res.should.be.json;
           res._body.should.be.a('object');

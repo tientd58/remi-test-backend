@@ -37,7 +37,7 @@ const initialDataRole = () => {
 };
 
 module.exports = {
-    createToken,
-    verifyExpiration,
-    initialDataRole,
+  createToken,
+  verifyExpiration,
+  initialDataRole,
 };

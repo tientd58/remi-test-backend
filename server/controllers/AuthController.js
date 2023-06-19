@@ -102,12 +102,12 @@ exports.signin = (req, res) => {
 exports.refreshToken = async (req, res) => {
   const { refreshToken: requestToken } = req.body;
 
-  if (requestToken == null) {
+  if (requestToken === null) {
     return res.status(403).json({ message: "Refresh Token is required!" });
   }
 
   try {
-    let refreshToken = await RefreshToken.findOne({ token: requestToken });
+    let refreshToken = await RefreshToken.findOne({ token: requestToken }).populate('user')
 
     if (!refreshToken) {
       res.status(403).json({ message: "Refresh token is not in database!" });

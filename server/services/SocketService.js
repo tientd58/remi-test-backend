@@ -9,9 +9,7 @@ class SocketService {
         origin: process.env.FRONTEND_URL
       }
     });
-    instance.on('connection', socket => {
-      console.log('connected');
-    });
+    instance.on('connection', (_socket) => {});
 
     return instance;
   }

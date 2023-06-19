@@ -11,8 +11,6 @@ const config = require('./server/config/database.js');
 const authRoutes = require('./server/routes/AuthRoutes');
 const videoRoutes = require('./server/routes/VideoRoutes');
 
-console.log('config: ', process.env.SECRET_KEY);
-
 const notifJobsQueue = new Queue(config.QUEUE_NAME, { redis: { port: config.REDIS_PORT, host: config.REDIS_HOST } });
 const app = express();
 const http = require("http").Server(app);
@@ -47,16 +45,13 @@ mongoose.connect(
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
     helper.initialDataRole();
   })
   .catch(err => {
-    console.error("Connection error", err);
     process.exit();
   });
 
 socketIO.on('connection', (socket) => {
-  console.log(`${socket.id} user just connected!`);
   socket.on("newEvent", (event) => {
     notifJobsQueue.add(event);
     //sends the events back to the React app
@@ -66,9 +61,7 @@ socketIO.on('connection', (socket) => {
       done(null, { t2: jobData.value * 2, t3: jobData.value * 3 });
     });
   });
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
+  socket.on('disconnect', () => {});
 });
 
 http.listen(port, () => {
