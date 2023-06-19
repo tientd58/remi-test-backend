@@ -11,7 +11,15 @@ const config = require('./server/config/database.js');
 const authRoutes = require('./server/routes/AuthRoutes');
 const videoRoutes = require('./server/routes/VideoRoutes');
 
-const notifJobsQueue = new Queue(config.QUEUE_NAME, { redis: { port: config.REDIS_PORT, host: config.REDIS_HOST } });
+const notifJobsQueue = new Queue(
+  config.QUEUE_NAME, {  
+    redis: {
+      port: config.REDIS_PORT,
+      host: config.REDIS_HOST,
+      username: config.REDIS_USERNAME,
+      password: config.REDIS_PASSWORD
+    }
+  });
 const app = express();
 const http = require("http").Server(app);
 

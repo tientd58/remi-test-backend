@@ -15,5 +15,7 @@ module.exports = {
   PORT: process.env.PORT || 8080,
   REDIS_HOST: process.env.REDIS_HOST || '127.0.0.1',
   REDIS_PORT: process.env.REDIS_PORT || 6379,
-  QUEUE_NAME: 'notification_jobs',
+  QUEUE_NAME: process.env.QUEUE_NAME || 'notification_jobs_local',
+  REDIS_USERNAME: process.env.REDIS_USERNAME,
+  REDIS_PASSWORD: process.env.REDIS_PASSWORD,
 };
