@@ -11,6 +11,8 @@ const config = require('./server/config/database.js');
 const authRoutes = require('./server/routes/AuthRoutes');
 const videoRoutes = require('./server/routes/VideoRoutes');
 
+console.log('config: ', process.env.SECRET_KEY);
+
 const notifJobsQueue = new Queue(config.QUEUE_NAME, { redis: { port: config.REDIS_PORT, host: config.REDIS_HOST } });
 const app = express();
 const http = require("http").Server(app);
